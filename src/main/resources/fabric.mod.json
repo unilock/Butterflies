@@ -1,0 +1,29 @@
+{
+	"schemaVersion": 1,
+	"id": "butterflies",
+	"version": "${version}",
+	"name": "Butterfly Mod",
+	"description": "Adds butterflies that can be caught and released with a butterfly net.",
+	"authors": [
+		"Doc Bok"
+	],
+	"contact": {
+		"sources": "https://github.com/doc-bok/Butterflies"
+	},
+	"license": "MIT",
+	"icon": "assets/butterflies/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.bokmcdok.butterflies.ButterfliesMod"
+		]
+	},
+	"mixins": [
+		"butterflies.mixins.json"
+	],
+	"depends": {
+		"fabricloader": "*",
+		"minecraft": ">=1.20.1",
+		"fabric-api": "*"
+	}
+}
