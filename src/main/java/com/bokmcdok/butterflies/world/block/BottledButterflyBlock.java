@@ -79,7 +79,7 @@ public class BottledButterflyBlock extends BaseEntityBlock {
                                     @NotNull LootParams.Builder builder) {
         BlockEntity blockEntity = builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
         if (blockEntity instanceof ButterflyBlockEntity butterflyBlockEntity) {
-            ItemStack stack = new ItemStack(ItemRegistry.BOTTLED_BUTTERFLY.get());
+            ItemStack stack = new ItemStack(ItemRegistry.BOTTLED_BUTTERFLY);
             BottledButterflyItem.setButterfly(stack, butterflyBlockEntity.getEntityId());
 
             List<ItemStack> result = Lists.newArrayList();

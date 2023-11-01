@@ -22,7 +22,7 @@ public class ButterflyBlockEntity extends BlockEntity {
     @NotNull
     public static ButterflyBlockEntity CreateBottledButterflyBlockEntity(BlockPos position,
                                                                          BlockState blockState) {
-        return new ButterflyBlockEntity(BlockEntityTypeRegistry.BOTTLED_BUTTERFLY_BLOCK.get(), position, blockState);
+        return new ButterflyBlockEntity(BlockEntityTypeRegistry.BOTTLED_BUTTERFLY_BLOCK, position, blockState);
     }
 
     /**

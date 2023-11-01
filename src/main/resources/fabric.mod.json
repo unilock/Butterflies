@@ -11,11 +11,14 @@
 		"sources": "https://github.com/doc-bok/Butterflies"
 	},
 	"license": "MIT",
-	"icon": "assets/butterflies/icon.png",
+	"icon": "assets/butterflies/textures/item/butterfly_net/butterfly_net.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
 			"com.bokmcdok.butterflies.ButterfliesMod"
+		],
+		"client": [
+			"com.bokmcdok.butterflies.ButterfliesClientMod"
 		]
 	},
 	"mixins": [

@@ -9,7 +9,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -60,8 +61,8 @@ public class ButterflyNetItem extends Item implements ButterflyContainerItem {
      * @return An empty butterfly net.
      */
     @Override
-    public ItemStack getCraftingRemainingItem(ItemStack itemStack) {
-        return new ItemStack(ItemRegistry.BUTTERFLY_NET.get());
+    public ItemStack getRecipeRemainder(ItemStack itemStack) {
+        return new ItemStack(ItemRegistry.BUTTERFLY_NET);
     }
 
     /**
@@ -74,32 +75,32 @@ public class ButterflyNetItem extends Item implements ButterflyContainerItem {
         return true;
     }
 
-    /**
-     * If we left-click on a butterfly with an empty net, the player will catch the butterfly.
-     * @param stack  The Item being used
-     * @param player The player that is attacking
-     * @param entity The entity being attacked
-     * @return TRUE if the left-click action is consumed.
-     */
-    @Override
-    public boolean onLeftClickEntity(ItemStack stack, Player player, Entity entity) {
-        if (entity instanceof Butterfly) {
-            CompoundTag tag = stack.getOrCreateTag();
-            if (!tag.contains(CompoundTagId.CUSTOM_MODEL_DATA) ||
-                !tag.contains(CompoundTagId.ENTITY_ID)) {
+	/**
+	 * If we left-click on a butterfly with an empty net, the player will catch the butterfly.
+	 * @param stack  The Item being used
+	 * @param entity The entity being attacked
+	 * @param player The player that is attacking
+	 * @return TRUE if the left-click action is consumed.
+	 */
+	@Override
+	public boolean hurtEnemy(ItemStack stack, LivingEntity entity, LivingEntity player) {
+		if (entity instanceof Butterfly) {
+			CompoundTag tag = stack.getOrCreateTag();
+			if (!tag.contains(CompoundTagId.CUSTOM_MODEL_DATA) ||
+				!tag.contains(CompoundTagId.ENTITY_ID)) {
 
-                tag.putInt(CompoundTagId.CUSTOM_MODEL_DATA,1);
-                tag.putString(CompoundTagId.ENTITY_ID, Objects.requireNonNull(entity.getEncodeId()));
-                entity.discard();
+				tag.putInt(CompoundTagId.CUSTOM_MODEL_DATA,1);
+				tag.putString(CompoundTagId.ENTITY_ID, Objects.requireNonNull(EntityType.getKey(entity.getType()).toString()));
+				entity.discard();
 
-                player.playSound(SoundEvents.PLAYER_ATTACK_SWEEP, 1F, 1F);
+				player.playSound(SoundEvents.PLAYER_ATTACK_SWEEP, 1F, 1F);
 
-                return true;
-            }
-        }
+				return true;
+			}
+		}
 
-        return super.onLeftClickEntity(stack, player, entity);
-    }
+		return super.hurtEnemy(stack, entity, player);
+	}
 
     /**
      * Right-clicking with a full net will release the net.

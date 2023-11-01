@@ -3,20 +3,15 @@ package com.bokmcdok.butterflies.world.entity.ambient;
 import com.bokmcdok.butterflies.ButterfliesMod;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityDimensions;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Creates the Caterpillar behaviour.
@@ -269,11 +264,9 @@ public class Caterpillar extends DirectionalCreature {
                              BlockPos position,
                              Direction direction) {
 
-        ResourceLocation key = new ResourceLocation(
-                ButterfliesMod.MODID,
-                entityId + "_caterpillar");
+        ResourceLocation key = ResourceLocation.tryBuild(ButterfliesMod.MODID, entityId + "_caterpillar");
 
-        EntityType<?> entityType = ForgeRegistries.ENTITY_TYPES.getValue(key);
+		EntityType<?> entityType = BuiltInRegistries.ENTITY_TYPE.get(key);
         if (entityType != null) {
             Entity entity = entityType.create(level);
             if (entity instanceof Caterpillar caterpillar) {
@@ -360,7 +353,7 @@ public class Caterpillar extends DirectionalCreature {
     @Override
     public void tick() {
         super.tick();
-        
+
         //  TODO: ?
     }
 

@@ -3,7 +3,8 @@
 	"package": "com.bokmcdok.butterflies.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
-		"ExampleMixin"
+		"CatMixin",
+    "ResultSlotMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

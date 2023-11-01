@@ -1,702 +1,130 @@
 package com.bokmcdok.butterflies.registries;
 
 import com.bokmcdok.butterflies.ButterfliesMod;
-import com.bokmcdok.butterflies.model.ButterflyModel;
-import com.bokmcdok.butterflies.model.CaterpillarModel;
-import com.bokmcdok.butterflies.model.ChrysalisModel;
-import com.bokmcdok.butterflies.renderer.entity.ButterflyRenderer;
-import com.bokmcdok.butterflies.renderer.entity.CaterpillarRenderer;
-import com.bokmcdok.butterflies.renderer.entity.ChrysalisRenderer;
 import com.bokmcdok.butterflies.world.entity.ambient.Butterfly;
 import com.bokmcdok.butterflies.world.entity.ambient.Caterpillar;
 import com.bokmcdok.butterflies.world.entity.ambient.Chrysalis;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.entity.SpawnPlacements;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ambient.AmbientCreature;
 import net.minecraft.world.level.levelgen.Heightmap;
-import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
-import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
-
 
 /**
  * This class registers all the entities we use with Forge's Entity Type Registry
  */
-@Mod.EventBusSubscriber(modid = ButterfliesMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class EntityTypeRegistry {
-
-    // An instance of a deferred registry we use to register our entity types.
-    public static final DeferredRegister<EntityType<?>> INSTANCE =
-            DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, ButterfliesMod.MODID);
-
-    // Register the butterflies.
-    public static final RegistryObject<EntityType<Butterfly>> BUTTERFLY_MORPHO =
-            INSTANCE.register(Butterfly.MORPHO_NAME, () -> EntityType.Builder.of(Butterfly::createMorphoButterfly, MobCategory.CREATURE)
-                    .sized(0.3f, 0.4f)
-                    .build(Butterfly.MORPHO_NAME));
-
-    public static final RegistryObject<EntityType<Butterfly>> BUTTERFLY_FORESTER =
-            INSTANCE.register(Butterfly.FORESTER_NAME, () -> EntityType.Builder.of(Butterfly::createForesterButterfly, MobCategory.CREATURE)
-                    .sized(0.3f, 0.4f)
-                    .build(Butterfly.FORESTER_NAME));
-
-    public static final RegistryObject<EntityType<Butterfly>> BUTTERFLY_COMMON =
-            INSTANCE.register(Butterfly.COMMON_NAME, () -> EntityType.Builder.of(Butterfly::createCommonButterfly, MobCategory.CREATURE)
-                    .sized(0.3f, 0.4f)
-                    .build(Butterfly.COMMON_NAME));
-
-    public static final RegistryObject<EntityType<Butterfly>> BUTTERFLY_EMPEROR =
-            INSTANCE.register(Butterfly.EMPEROR_NAME, () -> EntityType.Builder.of(Butterfly::createEmperorButterfly, MobCategory.CREATURE)
-                    .sized(0.3f, 0.4f)
-                    .build(Butterfly.EMPEROR_NAME));
-
-    public static final RegistryObject<EntityType<Butterfly>> BUTTERFLY_HAIRSTREAK =
-            INSTANCE.register(Butterfly.HAIRSTREAK_NAME, () -> EntityType.Builder.of(Butterfly::createHairstreakButterfly, MobCategory.CREATURE)
-                    .sized(0.3f, 0.4f)
-                    .build(Butterfly.HAIRSTREAK_NAME));
-
-    public static final RegistryObject<EntityType<Butterfly>> BUTTERFLY_RAINBOW =
-            INSTANCE.register(Butterfly.RAINBOW_NAME, () -> EntityType.Builder.of(Butterfly::createRainbowButterfly, MobCategory.CREATURE)
-                    .sized(0.3f, 0.4f)
-                    .build(Butterfly.RAINBOW_NAME));
-
-    public static final RegistryObject<EntityType<Butterfly>> BUTTERFLY_HEATH =
-            INSTANCE.register(Butterfly.HEATH_NAME, () -> EntityType.Builder.of(Butterfly::createHeathButterfly, MobCategory.CREATURE)
-                    .sized(0.3f, 0.4f)
-                    .build(Butterfly.HEATH_NAME));
-
-    public static final RegistryObject<EntityType<Butterfly>> BUTTERFLY_GLASSWING =
-            INSTANCE.register(Butterfly.GLASSWING_NAME, () -> EntityType.Builder.of(Butterfly::createGlasswingButterfly, MobCategory.CREATURE)
-                    .sized(0.3f, 0.4f)
-                    .build(Butterfly.GLASSWING_NAME));
-
-    public static final RegistryObject<EntityType<Butterfly>> BUTTERFLY_CHALKHILL =
-            INSTANCE.register(Butterfly.CHALKHILL_NAME, () -> EntityType.Builder.of(Butterfly::createChalkhillButterfly, MobCategory.CREATURE)
-                    .sized(0.3f, 0.4f)
-                    .build(Butterfly.CHALKHILL_NAME));
-
-    public static final RegistryObject<EntityType<Butterfly>> BUTTERFLY_SWALLOWTAIL =
-            INSTANCE.register(Butterfly.SWALLOWTAIL_NAME, () -> EntityType.Builder.of(Butterfly::createSwallowtailButterfly, MobCategory.CREATURE)
-                    .sized(0.3f, 0.4f)
-                    .build(Butterfly.SWALLOWTAIL_NAME));
-
-    public static final RegistryObject<EntityType<Butterfly>> BUTTERFLY_MONARCH =
-            INSTANCE.register(Butterfly.MONARCH_NAME, () -> EntityType.Builder.of(Butterfly::createMonarchButterfly, MobCategory.CREATURE)
-                    .sized(0.3f, 0.4f)
-                    .build(Butterfly.MONARCH_NAME));
-
-    public static final RegistryObject<EntityType<Butterfly>> BUTTERFLY_CABBAGE =
-            INSTANCE.register(Butterfly.CABBAGE_NAME, () -> EntityType.Builder.of(Butterfly::createCabbageButterfly, MobCategory.CREATURE)
-                    .sized(0.3f, 0.4f)
-                    .build(Butterfly.CABBAGE_NAME));
-
-    public static final RegistryObject<EntityType<Butterfly>> BUTTERFLY_ADMIRAL =
-            INSTANCE.register(Butterfly.ADMIRAL_NAME, () -> EntityType.Builder.of(Butterfly::createAdmiralButterfly, MobCategory.CREATURE)
-                    .sized(0.3f, 0.4f)
-                    .build(Butterfly.ADMIRAL_NAME));
-
-    public static final RegistryObject<EntityType<Butterfly>> BUTTERFLY_LONGWING =
-            INSTANCE.register(Butterfly.LONGWING_NAME, () -> EntityType.Builder.of(Butterfly::createLongwingButterfly, MobCategory.CREATURE)
-                    .sized(0.3f, 0.4f)
-                    .build(Butterfly.LONGWING_NAME));
-
-    public static final RegistryObject<EntityType<Butterfly>> BUTTERFLY_CLIPPER =
-            INSTANCE.register(Butterfly.CLIPPER_NAME, () -> EntityType.Builder.of(Butterfly::createClipperButterfly, MobCategory.CREATURE)
-                    .sized(0.3f, 0.4f)
-                    .build(Butterfly.CLIPPER_NAME));
-
-    public static final RegistryObject<EntityType<Butterfly>> BUTTERFLY_BUCKEYE =
-            INSTANCE.register(Butterfly.BUCKEYE_NAME, () -> EntityType.Builder.of(Butterfly::createBuckeyeButterfly, MobCategory.CREATURE)
-                    .sized(0.3f, 0.4f)
-                    .build(Butterfly.BUCKEYE_NAME));
+	// Register the butterflies.
+    public static final EntityType<Butterfly> BUTTERFLY_MORPHO = registerButterfly(Butterfly.MORPHO_NAME, Butterfly::createMorphoButterfly);
+    public static final EntityType<Butterfly> BUTTERFLY_FORESTER = registerButterfly(Butterfly.FORESTER_NAME, Butterfly::createForesterButterfly);
+    public static final EntityType<Butterfly> BUTTERFLY_COMMON = registerButterfly(Butterfly.COMMON_NAME, Butterfly::createCommonButterfly);
+    public static final EntityType<Butterfly> BUTTERFLY_EMPEROR = registerButterfly(Butterfly.EMPEROR_NAME, Butterfly::createEmperorButterfly);
+    public static final EntityType<Butterfly> BUTTERFLY_HAIRSTREAK = registerButterfly(Butterfly.HAIRSTREAK_NAME, Butterfly::createHairstreakButterfly);
+    public static final EntityType<Butterfly> BUTTERFLY_RAINBOW = registerButterfly(Butterfly.RAINBOW_NAME, Butterfly::createRainbowButterfly);
+    public static final EntityType<Butterfly> BUTTERFLY_HEATH = registerButterfly(Butterfly.HEATH_NAME, Butterfly::createHeathButterfly);
+    public static final EntityType<Butterfly> BUTTERFLY_GLASSWING = registerButterfly(Butterfly.GLASSWING_NAME, Butterfly::createGlasswingButterfly);
+    public static final EntityType<Butterfly> BUTTERFLY_CHALKHILL = registerButterfly(Butterfly.CHALKHILL_NAME, Butterfly::createChalkhillButterfly);
+    public static final EntityType<Butterfly> BUTTERFLY_SWALLOWTAIL = registerButterfly(Butterfly.SWALLOWTAIL_NAME, Butterfly::createSwallowtailButterfly);
+    public static final EntityType<Butterfly> BUTTERFLY_MONARCH = registerButterfly(Butterfly.MONARCH_NAME, Butterfly::createMonarchButterfly);
+    public static final EntityType<Butterfly> BUTTERFLY_CABBAGE = registerButterfly(Butterfly.CABBAGE_NAME, Butterfly::createCabbageButterfly);
+    public static final EntityType<Butterfly> BUTTERFLY_ADMIRAL = registerButterfly(Butterfly.ADMIRAL_NAME, Butterfly::createAdmiralButterfly);
+    public static final EntityType<Butterfly> BUTTERFLY_LONGWING = registerButterfly(Butterfly.LONGWING_NAME, Butterfly::createLongwingButterfly);
+    public static final EntityType<Butterfly> BUTTERFLY_CLIPPER = registerButterfly(Butterfly.CLIPPER_NAME, Butterfly::createClipperButterfly);
+    public static final EntityType<Butterfly> BUTTERFLY_BUCKEYE = registerButterfly(Butterfly.BUCKEYE_NAME, Butterfly::createBuckeyeButterfly);
 
     // Register the caterpillars.
-    public static final RegistryObject<EntityType<Caterpillar>> CATERPILLAR_MORPHO =
-            INSTANCE.register(Caterpillar.MORPHO_NAME, () -> EntityType.Builder.of(Caterpillar::createMorphoCaterpillar, MobCategory.CREATURE)
-                    .sized(0.1f, 0.1f)
-                    .build(Caterpillar.MORPHO_NAME));
-
-    public static final RegistryObject<EntityType<Caterpillar>> CATERPILLAR_FORESTER =
-            INSTANCE.register(Caterpillar.FORESTER_NAME, () -> EntityType.Builder.of(Caterpillar::createForesterCaterpillar, MobCategory.CREATURE)
-                    .sized(0.1f, 0.1f)
-                    .build(Caterpillar.FORESTER_NAME));
-
-    public static final RegistryObject<EntityType<Caterpillar>> CATERPILLAR_COMMON =
-            INSTANCE.register(Caterpillar.COMMON_NAME, () -> EntityType.Builder.of(Caterpillar::createCommonCaterpillar, MobCategory.CREATURE)
-                    .sized(0.1f, 0.1f)
-                    .build(Caterpillar.COMMON_NAME));
-
-    public static final RegistryObject<EntityType<Caterpillar>> CATERPILLAR_EMPEROR =
-            INSTANCE.register(Caterpillar.EMPEROR_NAME, () -> EntityType.Builder.of(Caterpillar::createEmperorCaterpillar, MobCategory.CREATURE)
-                    .sized(0.1f, 0.1f)
-                    .build(Caterpillar.EMPEROR_NAME));
-
-    public static final RegistryObject<EntityType<Caterpillar>> CATERPILLAR_HAIRSTREAK =
-            INSTANCE.register(Caterpillar.HAIRSTREAK_NAME, () -> EntityType.Builder.of(Caterpillar::createHairstreakCaterpillar, MobCategory.AMBIENT)
-                    .sized(0.1f, 0.1f)
-                    .build(Caterpillar.HAIRSTREAK_NAME));
-
-    public static final RegistryObject<EntityType<Caterpillar>> CATERPILLAR_RAINBOW =
-            INSTANCE.register(Caterpillar.RAINBOW_NAME, () -> EntityType.Builder.of(Caterpillar::createRainbowCaterpillar, MobCategory.CREATURE)
-                    .sized(0.1f, 0.1f)
-                    .build(Caterpillar.RAINBOW_NAME));
-
-    public static final RegistryObject<EntityType<Caterpillar>> CATERPILLAR_HEATH =
-            INSTANCE.register(Caterpillar.HEATH_NAME, () -> EntityType.Builder.of(Caterpillar::createHeathCaterpillar, MobCategory.CREATURE)
-                    .sized(0.1f, 0.1f)
-                    .build(Caterpillar.HEATH_NAME));
-
-    public static final RegistryObject<EntityType<Caterpillar>> CATERPILLAR_GLASSWING =
-            INSTANCE.register(Caterpillar.GLASSWING_NAME, () -> EntityType.Builder.of(Caterpillar::createGlasswingCaterpillar, MobCategory.CREATURE)
-                    .sized(0.1f, 0.1f)
-                    .build(Caterpillar.GLASSWING_NAME));
-
-    public static final RegistryObject<EntityType<Caterpillar>> CATERPILLAR_CHALKHILL =
-            INSTANCE.register(Caterpillar.CHALKHILL_NAME, () -> EntityType.Builder.of(Caterpillar::createChalkhillCaterpillar, MobCategory.CREATURE)
-                    .sized(0.1f, 0.1f)
-                    .build(Caterpillar.CHALKHILL_NAME));
-
-    public static final RegistryObject<EntityType<Caterpillar>> CATERPILLAR_SWALLOWTAIL =
-            INSTANCE.register(Caterpillar.SWALLOWTAIL_NAME, () -> EntityType.Builder.of(Caterpillar::createSwallowtailCaterpillar, MobCategory.CREATURE)
-                    .sized(0.1f, 0.1f)
-                    .build(Caterpillar.SWALLOWTAIL_NAME));
-
-    public static final RegistryObject<EntityType<Caterpillar>> CATERPILLAR_MONARCH =
-            INSTANCE.register(Caterpillar.MONARCH_NAME, () -> EntityType.Builder.of(Caterpillar::createMonarchCaterpillar, MobCategory.CREATURE)
-                    .sized(0.1f, 0.1f)
-                    .build(Caterpillar.MONARCH_NAME));
-
-    public static final RegistryObject<EntityType<Caterpillar>> CATERPILLAR_CABBAGE =
-            INSTANCE.register(Caterpillar.CABBAGE_NAME, () -> EntityType.Builder.of(Caterpillar::createCabbageCaterpillar, MobCategory.CREATURE)
-                    .sized(0.1f, 0.1f)
-                    .build(Caterpillar.CABBAGE_NAME));
-
-    public static final RegistryObject<EntityType<Caterpillar>> CATERPILLAR_ADMIRAL =
-            INSTANCE.register(Caterpillar.ADMIRAL_NAME, () -> EntityType.Builder.of(Caterpillar::createAdmiralCaterpillar, MobCategory.CREATURE)
-                    .sized(0.1f, 0.1f)
-                    .build(Caterpillar.ADMIRAL_NAME));
-
-    public static final RegistryObject<EntityType<Caterpillar>> CATERPILLAR_LONGWING =
-            INSTANCE.register(Caterpillar.LONGWING_NAME, () -> EntityType.Builder.of(Caterpillar::createLongwingCaterpillar, MobCategory.CREATURE)
-                    .sized(0.1f, 0.1f)
-                    .build(Caterpillar.LONGWING_NAME));
-
-    public static final RegistryObject<EntityType<Caterpillar>> CATERPILLAR_CLIPPER =
-            INSTANCE.register(Caterpillar.CLIPPER_NAME, () -> EntityType.Builder.of(Caterpillar::createClipperCaterpillar, MobCategory.CREATURE)
-                    .sized(0.1f, 0.1f)
-                    .build(Caterpillar.CLIPPER_NAME));
-
-    public static final RegistryObject<EntityType<Caterpillar>> CATERPILLAR_BUCKEYE =
-            INSTANCE.register(Caterpillar.BUCKEYE_NAME, () -> EntityType.Builder.of(Caterpillar::createBuckeyeCaterpillar, MobCategory.CREATURE)
-                    .sized(0.1f, 0.1f)
-                    .build(Caterpillar.BUCKEYE_NAME));
+    public static final EntityType<Caterpillar> CATERPILLAR_MORPHO = registerCaterpillar(Caterpillar.MORPHO_NAME, Caterpillar::createMorphoCaterpillar);
+    public static final EntityType<Caterpillar> CATERPILLAR_FORESTER = registerCaterpillar(Caterpillar.FORESTER_NAME, Caterpillar::createForesterCaterpillar);
+    public static final EntityType<Caterpillar> CATERPILLAR_COMMON = registerCaterpillar(Caterpillar.COMMON_NAME, Caterpillar::createCommonCaterpillar);
+    public static final EntityType<Caterpillar> CATERPILLAR_EMPEROR = registerCaterpillar(Caterpillar.EMPEROR_NAME, Caterpillar::createEmperorCaterpillar);
+	public static final EntityType<Caterpillar> CATERPILLAR_HAIRSTREAK =registerCaterpillarHairstreak(Caterpillar.HAIRSTREAK_NAME, Caterpillar::createHairstreakCaterpillar);
+    public static final EntityType<Caterpillar> CATERPILLAR_RAINBOW = registerCaterpillar(Caterpillar.RAINBOW_NAME, Caterpillar::createRainbowCaterpillar);
+    public static final EntityType<Caterpillar> CATERPILLAR_HEATH = registerCaterpillar(Caterpillar.HEATH_NAME, Caterpillar::createHeathCaterpillar);
+    public static final EntityType<Caterpillar> CATERPILLAR_GLASSWING = registerCaterpillar(Caterpillar.GLASSWING_NAME, Caterpillar::createGlasswingCaterpillar);
+    public static final EntityType<Caterpillar> CATERPILLAR_CHALKHILL = registerCaterpillar(Caterpillar.CHALKHILL_NAME, Caterpillar::createChalkhillCaterpillar);
+    public static final EntityType<Caterpillar> CATERPILLAR_SWALLOWTAIL = registerCaterpillar(Caterpillar.SWALLOWTAIL_NAME, Caterpillar::createSwallowtailCaterpillar);
+    public static final EntityType<Caterpillar> CATERPILLAR_MONARCH = registerCaterpillar(Caterpillar.MONARCH_NAME, Caterpillar::createMonarchCaterpillar);
+    public static final EntityType<Caterpillar> CATERPILLAR_CABBAGE = registerCaterpillar(Caterpillar.CABBAGE_NAME, Caterpillar::createCabbageCaterpillar);
+    public static final EntityType<Caterpillar> CATERPILLAR_ADMIRAL = registerCaterpillar(Caterpillar.ADMIRAL_NAME, Caterpillar::createAdmiralCaterpillar);
+    public static final EntityType<Caterpillar> CATERPILLAR_LONGWING = registerCaterpillar(Caterpillar.LONGWING_NAME, Caterpillar::createLongwingCaterpillar);
+    public static final EntityType<Caterpillar> CATERPILLAR_CLIPPER = registerCaterpillar(Caterpillar.CLIPPER_NAME, Caterpillar::createClipperCaterpillar);
+    public static final EntityType<Caterpillar> CATERPILLAR_BUCKEYE = registerCaterpillar(Caterpillar.BUCKEYE_NAME, Caterpillar::createBuckeyeCaterpillar);
 
     // Register the chrysalises.
-    public static final RegistryObject<EntityType<Chrysalis>> CHRYSALIS_MORPHO =
-            INSTANCE.register(Chrysalis.MORPHO_NAME, () -> EntityType.Builder.of(Chrysalis::createMorpho, MobCategory.CREATURE)
-                    .sized(0.1f, 0.1f)
-                    .build(Chrysalis.MORPHO_NAME));
-
-    public static final RegistryObject<EntityType<Chrysalis>> CHRYSALIS_FORESTER =
-            INSTANCE.register(Chrysalis.FORESTER_NAME, () -> EntityType.Builder.of(Chrysalis::createForester, MobCategory.CREATURE)
-                    .sized(0.1f, 0.1f)
-                    .build(Chrysalis.FORESTER_NAME));
-
-    public static final RegistryObject<EntityType<Chrysalis>> CHRYSALIS_COMMON =
-            INSTANCE.register(Chrysalis.COMMON_NAME, () -> EntityType.Builder.of(Chrysalis::createCommon, MobCategory.CREATURE)
-                    .sized(0.1f, 0.1f)
-                    .build(Chrysalis.COMMON_NAME));
-
-    public static final RegistryObject<EntityType<Chrysalis>> CHRYSALIS_EMPEROR =
-            INSTANCE.register(Chrysalis.EMPEROR_NAME, () -> EntityType.Builder.of(Chrysalis::createEmperor, MobCategory.CREATURE)
-                    .sized(0.1f, 0.1f)
-                    .build(Chrysalis.EMPEROR_NAME));
-
-    public static final RegistryObject<EntityType<Chrysalis>> CHRYSALIS_HAIRSTREAK =
-            INSTANCE.register(Chrysalis.HAIRSTREAK_NAME, () -> EntityType.Builder.of(Chrysalis::createHairstreak, MobCategory.CREATURE)
-                    .sized(0.1f, 0.1f)
-                    .build(Chrysalis.HAIRSTREAK_NAME));
-
-    public static final RegistryObject<EntityType<Chrysalis>> CHRYSALIS_RAINBOW =
-            INSTANCE.register(Chrysalis.RAINBOW_NAME, () -> EntityType.Builder.of(Chrysalis::createRainbow, MobCategory.CREATURE)
-                    .sized(0.1f, 0.1f)
-                    .build(Chrysalis.RAINBOW_NAME));
-
-    public static final RegistryObject<EntityType<Chrysalis>> CHRYSALIS_HEATH =
-            INSTANCE.register(Chrysalis.HEATH_NAME, () -> EntityType.Builder.of(Chrysalis::createHeath, MobCategory.CREATURE)
-                    .sized(0.1f, 0.1f)
-                    .build(Chrysalis.HEATH_NAME));
-
-    public static final RegistryObject<EntityType<Chrysalis>> CHRYSALIS_GLASSWING =
-            INSTANCE.register(Chrysalis.GLASSWING_NAME, () -> EntityType.Builder.of(Chrysalis::createGlasswing, MobCategory.CREATURE)
-                    .sized(0.1f, 0.1f)
-                    .build(Chrysalis.GLASSWING_NAME));
-
-    public static final RegistryObject<EntityType<Chrysalis>> CHRYSALIS_CHALKHILL =
-            INSTANCE.register(Chrysalis.CHALKHILL_NAME, () -> EntityType.Builder.of(Chrysalis::createChalkhill, MobCategory.CREATURE)
-                    .sized(0.1f, 0.1f)
-                    .build(Chrysalis.CHALKHILL_NAME));
-
-    public static final RegistryObject<EntityType<Chrysalis>> CHRYSALIS_SWALLOWTAIL =
-            INSTANCE.register(Chrysalis.SWALLOWTAIL_NAME, () -> EntityType.Builder.of(Chrysalis::createSwallowtail, MobCategory.CREATURE)
-                    .sized(0.1f, 0.1f)
-                    .build(Chrysalis.SWALLOWTAIL_NAME));
-
-    public static final RegistryObject<EntityType<Chrysalis>> CHRYSALIS_MONARCH =
-            INSTANCE.register(Chrysalis.MONARCH_NAME, () -> EntityType.Builder.of(Chrysalis::createMonarch, MobCategory.CREATURE)
-                    .sized(0.1f, 0.1f)
-                    .build(Chrysalis.MONARCH_NAME));
-
-    public static final RegistryObject<EntityType<Chrysalis>> CHRYSALIS_CABBAGE =
-            INSTANCE.register(Chrysalis.CABBAGE_NAME, () -> EntityType.Builder.of(Chrysalis::createCabbage, MobCategory.CREATURE)
-                    .sized(0.1f, 0.1f)
-                    .build(Chrysalis.CABBAGE_NAME));
-
-    public static final RegistryObject<EntityType<Chrysalis>> CHRYSALIS_ADMIRAL =
-            INSTANCE.register(Chrysalis.ADMIRAL_NAME, () -> EntityType.Builder.of(Chrysalis::createAdmiral, MobCategory.CREATURE)
-                    .sized(0.1f, 0.1f)
-                    .build(Chrysalis.ADMIRAL_NAME));
-
-    public static final RegistryObject<EntityType<Chrysalis>> CHRYSALIS_LONGWING =
-            INSTANCE.register(Chrysalis.LONGWING_NAME, () -> EntityType.Builder.of(Chrysalis::createLongwing, MobCategory.CREATURE)
-                    .sized(0.1f, 0.1f)
-                    .build(Chrysalis.LONGWING_NAME));
-
-    public static final RegistryObject<EntityType<Chrysalis>> CHRYSALIS_CLIPPER =
-            INSTANCE.register(Chrysalis.CLIPPER_NAME, () -> EntityType.Builder.of(Chrysalis::createClipper, MobCategory.CREATURE)
-                    .sized(0.1f, 0.1f)
-                    .build(Chrysalis.CLIPPER_NAME));
-
-    public static final RegistryObject<EntityType<Chrysalis>> CHRYSALIS_BUCKEYE =
-            INSTANCE.register(Chrysalis.BUCKEYE_NAME, () -> EntityType.Builder.of(Chrysalis::createBuckeye, MobCategory.CREATURE)
-                    .sized(0.1f, 0.1f)
-                    .build(Chrysalis.BUCKEYE_NAME));
-
-    /**
-     * Register the renderers for our entities
-     * @param event The event information
-     */
-    @SubscribeEvent
-    public static void registerEntityRenders(final EntityRenderersEvent.RegisterRenderers event)
-    {
-        event.registerEntityRenderer(BUTTERFLY_MORPHO.get(), ButterflyRenderer::new);
-        event.registerEntityRenderer(BUTTERFLY_COMMON.get(), ButterflyRenderer::new);
-        event.registerEntityRenderer(BUTTERFLY_FORESTER.get(), ButterflyRenderer::new);
-        event.registerEntityRenderer(BUTTERFLY_EMPEROR.get(), ButterflyRenderer::new);
-        event.registerEntityRenderer(BUTTERFLY_HAIRSTREAK.get(), ButterflyRenderer::new);
-        event.registerEntityRenderer(BUTTERFLY_RAINBOW.get(), ButterflyRenderer::new);
-        event.registerEntityRenderer(BUTTERFLY_HEATH.get(), ButterflyRenderer::new);
-        event.registerEntityRenderer(BUTTERFLY_GLASSWING.get(), ButterflyRenderer::new);
-        event.registerEntityRenderer(BUTTERFLY_CHALKHILL.get(), ButterflyRenderer::new);
-        event.registerEntityRenderer(BUTTERFLY_SWALLOWTAIL.get(), ButterflyRenderer::new);
-        event.registerEntityRenderer(BUTTERFLY_MONARCH.get(), ButterflyRenderer::new);
-        event.registerEntityRenderer(BUTTERFLY_CABBAGE.get(), ButterflyRenderer::new);
-        event.registerEntityRenderer(BUTTERFLY_ADMIRAL.get(), ButterflyRenderer::new);
-        event.registerEntityRenderer(BUTTERFLY_LONGWING.get(), ButterflyRenderer::new);
-        event.registerEntityRenderer(BUTTERFLY_CLIPPER.get(), ButterflyRenderer::new);
-        event.registerEntityRenderer(BUTTERFLY_BUCKEYE.get(), ButterflyRenderer::new);
-
-        event.registerEntityRenderer(CATERPILLAR_MORPHO.get(), CaterpillarRenderer::new);
-        event.registerEntityRenderer(CATERPILLAR_COMMON.get(), CaterpillarRenderer::new);
-        event.registerEntityRenderer(CATERPILLAR_FORESTER.get(), CaterpillarRenderer::new);
-        event.registerEntityRenderer(CATERPILLAR_EMPEROR.get(), CaterpillarRenderer::new);
-        event.registerEntityRenderer(CATERPILLAR_HAIRSTREAK.get(), CaterpillarRenderer::new);
-        event.registerEntityRenderer(CATERPILLAR_RAINBOW.get(), CaterpillarRenderer::new);
-        event.registerEntityRenderer(CATERPILLAR_HEATH.get(), CaterpillarRenderer::new);
-        event.registerEntityRenderer(CATERPILLAR_GLASSWING.get(), CaterpillarRenderer::new);
-        event.registerEntityRenderer(CATERPILLAR_CHALKHILL.get(), CaterpillarRenderer::new);
-        event.registerEntityRenderer(CATERPILLAR_SWALLOWTAIL.get(), CaterpillarRenderer::new);
-        event.registerEntityRenderer(CATERPILLAR_MONARCH.get(), CaterpillarRenderer::new);
-        event.registerEntityRenderer(CATERPILLAR_CABBAGE.get(), CaterpillarRenderer::new);
-        event.registerEntityRenderer(CATERPILLAR_ADMIRAL.get(), CaterpillarRenderer::new);
-        event.registerEntityRenderer(CATERPILLAR_LONGWING.get(), CaterpillarRenderer::new);
-        event.registerEntityRenderer(CATERPILLAR_CLIPPER.get(), CaterpillarRenderer::new);
-        event.registerEntityRenderer(CATERPILLAR_BUCKEYE.get(), CaterpillarRenderer::new);
-
-        event.registerEntityRenderer(CHRYSALIS_MORPHO.get(), ChrysalisRenderer::new);
-        event.registerEntityRenderer(CHRYSALIS_COMMON.get(), ChrysalisRenderer::new);
-        event.registerEntityRenderer(CHRYSALIS_FORESTER.get(), ChrysalisRenderer::new);
-        event.registerEntityRenderer(CHRYSALIS_EMPEROR.get(), ChrysalisRenderer::new);
-        event.registerEntityRenderer(CHRYSALIS_HAIRSTREAK.get(), ChrysalisRenderer::new);
-        event.registerEntityRenderer(CHRYSALIS_RAINBOW.get(), ChrysalisRenderer::new);
-        event.registerEntityRenderer(CHRYSALIS_HEATH.get(), ChrysalisRenderer::new);
-        event.registerEntityRenderer(CHRYSALIS_GLASSWING.get(), ChrysalisRenderer::new);
-        event.registerEntityRenderer(CHRYSALIS_CHALKHILL.get(), ChrysalisRenderer::new);
-        event.registerEntityRenderer(CHRYSALIS_SWALLOWTAIL.get(), ChrysalisRenderer::new);
-        event.registerEntityRenderer(CHRYSALIS_MONARCH.get(), ChrysalisRenderer::new);
-        event.registerEntityRenderer(CHRYSALIS_CABBAGE.get(), ChrysalisRenderer::new);
-        event.registerEntityRenderer(CHRYSALIS_ADMIRAL.get(), ChrysalisRenderer::new);
-        event.registerEntityRenderer(CHRYSALIS_LONGWING.get(), ChrysalisRenderer::new);
-        event.registerEntityRenderer(CHRYSALIS_CLIPPER.get(), ChrysalisRenderer::new);
-        event.registerEntityRenderer(CHRYSALIS_BUCKEYE.get(), ChrysalisRenderer::new);
-    }
-
-    /**
-     * Register the attributes for living entities
-     */
-    @SubscribeEvent
-    public static void registerEntityAttributes(EntityAttributeCreationEvent event) {
-        event.put(BUTTERFLY_MORPHO.get(), Butterfly.createAttributes().build());
-        event.put(BUTTERFLY_COMMON.get(), Butterfly.createAttributes().build());
-        event.put(BUTTERFLY_FORESTER.get(), Butterfly.createAttributes().build());
-        event.put(BUTTERFLY_EMPEROR.get(), Butterfly.createAttributes().build());
-        event.put(BUTTERFLY_HAIRSTREAK.get(), Butterfly.createAttributes().build());
-        event.put(BUTTERFLY_RAINBOW.get(), Butterfly.createAttributes().build());
-        event.put(BUTTERFLY_HEATH.get(), Butterfly.createAttributes().build());
-        event.put(BUTTERFLY_GLASSWING.get(), Butterfly.createAttributes().build());
-        event.put(BUTTERFLY_CHALKHILL.get(), Butterfly.createAttributes().build());
-        event.put(BUTTERFLY_SWALLOWTAIL.get(), Butterfly.createAttributes().build());
-        event.put(BUTTERFLY_MONARCH.get(), Butterfly.createAttributes().build());
-        event.put(BUTTERFLY_CABBAGE.get(), Butterfly.createAttributes().build());
-        event.put(BUTTERFLY_ADMIRAL.get(), Butterfly.createAttributes().build());
-        event.put(BUTTERFLY_LONGWING.get(), Butterfly.createAttributes().build());
-        event.put(BUTTERFLY_CLIPPER.get(), Butterfly.createAttributes().build());
-        event.put(BUTTERFLY_BUCKEYE.get(), Butterfly.createAttributes().build());
-
-        event.put(CATERPILLAR_MORPHO.get(), Caterpillar.createAttributes().build());
-        event.put(CATERPILLAR_COMMON.get(), Caterpillar.createAttributes().build());
-        event.put(CATERPILLAR_FORESTER.get(), Caterpillar.createAttributes().build());
-        event.put(CATERPILLAR_EMPEROR.get(), Caterpillar.createAttributes().build());
-        event.put(CATERPILLAR_HAIRSTREAK.get(), Caterpillar.createAttributes().build());
-        event.put(CATERPILLAR_RAINBOW.get(), Caterpillar.createAttributes().build());
-        event.put(CATERPILLAR_HEATH.get(), Caterpillar.createAttributes().build());
-        event.put(CATERPILLAR_GLASSWING.get(), Caterpillar.createAttributes().build());
-        event.put(CATERPILLAR_CHALKHILL.get(), Caterpillar.createAttributes().build());
-        event.put(CATERPILLAR_SWALLOWTAIL.get(), Caterpillar.createAttributes().build());
-        event.put(CATERPILLAR_MONARCH.get(), Caterpillar.createAttributes().build());
-        event.put(CATERPILLAR_CABBAGE.get(), Caterpillar.createAttributes().build());
-        event.put(CATERPILLAR_ADMIRAL.get(), Caterpillar.createAttributes().build());
-        event.put(CATERPILLAR_LONGWING.get(), Caterpillar.createAttributes().build());
-        event.put(CATERPILLAR_CLIPPER.get(), Caterpillar.createAttributes().build());
-        event.put(CATERPILLAR_BUCKEYE.get(), Caterpillar.createAttributes().build());
-
-        event.put(CHRYSALIS_MORPHO.get(), Chrysalis.createAttributes().build());
-        event.put(CHRYSALIS_COMMON.get(), Chrysalis.createAttributes().build());
-        event.put(CHRYSALIS_FORESTER.get(), Chrysalis.createAttributes().build());
-        event.put(CHRYSALIS_EMPEROR.get(), Chrysalis.createAttributes().build());
-        event.put(CHRYSALIS_HAIRSTREAK.get(), Chrysalis.createAttributes().build());
-        event.put(CHRYSALIS_RAINBOW.get(), Chrysalis.createAttributes().build());
-        event.put(CHRYSALIS_HEATH.get(), Chrysalis.createAttributes().build());
-        event.put(CHRYSALIS_GLASSWING.get(), Chrysalis.createAttributes().build());
-        event.put(CHRYSALIS_CHALKHILL.get(), Chrysalis.createAttributes().build());
-        event.put(CHRYSALIS_SWALLOWTAIL.get(), Chrysalis.createAttributes().build());
-        event.put(CHRYSALIS_MONARCH.get(), Chrysalis.createAttributes().build());
-        event.put(CHRYSALIS_CABBAGE.get(), Chrysalis.createAttributes().build());
-        event.put(CHRYSALIS_ADMIRAL.get(), Chrysalis.createAttributes().build());
-        event.put(CHRYSALIS_LONGWING.get(), Chrysalis.createAttributes().build());
-        event.put(CHRYSALIS_CLIPPER.get(), Chrysalis.createAttributes().build());
-        event.put(CHRYSALIS_BUCKEYE.get(), Chrysalis.createAttributes().build());
-    }
-
-    /**
-     * Register entity spawn placements here
-     * @param event The event information
-     */
-    @SubscribeEvent
-    public static void registerEntitySpawnPlacement(SpawnPlacementRegisterEvent event) {
-        event.register(BUTTERFLY_MORPHO.get(),
-                SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING,
-                Butterfly::checkButterflySpawnRules,
-                SpawnPlacementRegisterEvent.Operation.AND);
-
-        event.register(BUTTERFLY_COMMON.get(),
-                SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING,
-                Butterfly::checkButterflySpawnRules,
-                SpawnPlacementRegisterEvent.Operation.AND);
-
-        event.register(BUTTERFLY_FORESTER.get(),
-                SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING,
-                Butterfly::checkButterflySpawnRules,
-                SpawnPlacementRegisterEvent.Operation.AND);
-
-        event.register(BUTTERFLY_EMPEROR.get(),
-                SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING,
-                Butterfly::checkButterflySpawnRules,
-                SpawnPlacementRegisterEvent.Operation.AND);
-
-        event.register(BUTTERFLY_HAIRSTREAK.get(),
-                SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING,
-                Butterfly::checkButterflySpawnRules,
-                SpawnPlacementRegisterEvent.Operation.AND);
-
-        event.register(BUTTERFLY_RAINBOW.get(),
-                SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING,
-                Butterfly::checkButterflySpawnRules,
-                SpawnPlacementRegisterEvent.Operation.AND);
-
-        event.register(BUTTERFLY_HEATH.get(),
-                SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING,
-                Butterfly::checkButterflySpawnRules,
-                SpawnPlacementRegisterEvent.Operation.AND);
-
-        event.register(BUTTERFLY_GLASSWING.get(),
-                SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING,
-                Butterfly::checkButterflySpawnRules,
-                SpawnPlacementRegisterEvent.Operation.AND);
-
-        event.register(BUTTERFLY_CHALKHILL.get(),
-                SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING,
-                Butterfly::checkButterflySpawnRules,
-                SpawnPlacementRegisterEvent.Operation.AND);
-
-        event.register(BUTTERFLY_SWALLOWTAIL.get(),
-                SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING,
-                Butterfly::checkButterflySpawnRules,
-                SpawnPlacementRegisterEvent.Operation.AND);
-
-        event.register(BUTTERFLY_MONARCH.get(),
-                SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING,
-                Butterfly::checkButterflySpawnRules,
-                SpawnPlacementRegisterEvent.Operation.AND);
-
-        event.register(BUTTERFLY_CABBAGE.get(),
-                SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING,
-                Butterfly::checkButterflySpawnRules,
-                SpawnPlacementRegisterEvent.Operation.AND);
-
-        event.register(BUTTERFLY_ADMIRAL.get(),
-                SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING,
-                Butterfly::checkButterflySpawnRules,
-                SpawnPlacementRegisterEvent.Operation.AND);
-
-        event.register(BUTTERFLY_LONGWING.get(),
-                SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING,
-                Butterfly::checkButterflySpawnRules,
-                SpawnPlacementRegisterEvent.Operation.AND);
-
-        event.register(BUTTERFLY_CLIPPER.get(),
-                SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING,
-                Butterfly::checkButterflySpawnRules,
-                SpawnPlacementRegisterEvent.Operation.AND);
-
-        event.register(BUTTERFLY_BUCKEYE.get(),
-                SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING,
-                Butterfly::checkButterflySpawnRules,
-                SpawnPlacementRegisterEvent.Operation.AND);
-
-        event.register(CATERPILLAR_MORPHO.get(),
-                SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING,
-                AmbientCreature::checkMobSpawnRules,
-                SpawnPlacementRegisterEvent.Operation.AND);
-
-        event.register(CATERPILLAR_COMMON.get(),
-                SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING,
-                AmbientCreature::checkMobSpawnRules,
-                SpawnPlacementRegisterEvent.Operation.AND);
-
-        event.register(CATERPILLAR_FORESTER.get(),
-                SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING,
-                AmbientCreature::checkMobSpawnRules,
-                SpawnPlacementRegisterEvent.Operation.AND);
-
-        event.register(CATERPILLAR_EMPEROR.get(),
-                SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING,
-                AmbientCreature::checkMobSpawnRules,
-                SpawnPlacementRegisterEvent.Operation.AND);
-
-        event.register(CATERPILLAR_HAIRSTREAK.get(),
-                SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING,
-                AmbientCreature::checkMobSpawnRules,
-                SpawnPlacementRegisterEvent.Operation.AND);
-
-        event.register(CATERPILLAR_RAINBOW.get(),
-                SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING,
-                AmbientCreature::checkMobSpawnRules,
-                SpawnPlacementRegisterEvent.Operation.AND);
-
-        event.register(CATERPILLAR_HEATH.get(),
-                SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING,
-                AmbientCreature::checkMobSpawnRules,
-                SpawnPlacementRegisterEvent.Operation.AND);
-
-        event.register(CATERPILLAR_GLASSWING.get(),
-                SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING,
-                AmbientCreature::checkMobSpawnRules,
-                SpawnPlacementRegisterEvent.Operation.AND);
-
-        event.register(CATERPILLAR_CHALKHILL.get(),
-                SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING,
-                AmbientCreature::checkMobSpawnRules,
-                SpawnPlacementRegisterEvent.Operation.AND);
-
-        event.register(CATERPILLAR_SWALLOWTAIL.get(),
-                SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING,
-                AmbientCreature::checkMobSpawnRules,
-                SpawnPlacementRegisterEvent.Operation.AND);
-
-        event.register(CATERPILLAR_MONARCH.get(),
-                SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING,
-                AmbientCreature::checkMobSpawnRules,
-                SpawnPlacementRegisterEvent.Operation.AND);
-
-        event.register(CATERPILLAR_CABBAGE.get(),
-                SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING,
-                AmbientCreature::checkMobSpawnRules,
-                SpawnPlacementRegisterEvent.Operation.AND);
-
-        event.register(CATERPILLAR_ADMIRAL.get(),
-                SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING,
-                AmbientCreature::checkMobSpawnRules,
-                SpawnPlacementRegisterEvent.Operation.AND);
-
-        event.register(CATERPILLAR_LONGWING.get(),
-                SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING,
-                AmbientCreature::checkMobSpawnRules,
-                SpawnPlacementRegisterEvent.Operation.AND);
-
-        event.register(CATERPILLAR_CLIPPER.get(),
-                SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING,
-                AmbientCreature::checkMobSpawnRules,
-                SpawnPlacementRegisterEvent.Operation.AND);
-
-        event.register(CATERPILLAR_BUCKEYE.get(),
-                SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING,
-                AmbientCreature::checkMobSpawnRules,
-                SpawnPlacementRegisterEvent.Operation.AND);
-
-        event.register(CHRYSALIS_MORPHO.get(),
-                SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING,
-                AmbientCreature::checkMobSpawnRules,
-                SpawnPlacementRegisterEvent.Operation.AND);
-
-        event.register(CHRYSALIS_COMMON.get(),
-                SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING,
-                AmbientCreature::checkMobSpawnRules,
-                SpawnPlacementRegisterEvent.Operation.AND);
-
-        event.register(CHRYSALIS_FORESTER.get(),
-                SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING,
-                AmbientCreature::checkMobSpawnRules,
-                SpawnPlacementRegisterEvent.Operation.AND);
-
-        event.register(CHRYSALIS_EMPEROR.get(),
-                SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING,
-                AmbientCreature::checkMobSpawnRules,
-                SpawnPlacementRegisterEvent.Operation.AND);
-
-        event.register(CHRYSALIS_HAIRSTREAK.get(),
-                SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING,
-                AmbientCreature::checkMobSpawnRules,
-                SpawnPlacementRegisterEvent.Operation.AND);
-
-        event.register(CHRYSALIS_RAINBOW.get(),
-                SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING,
-                AmbientCreature::checkMobSpawnRules,
-                SpawnPlacementRegisterEvent.Operation.AND);
-
-        event.register(CHRYSALIS_HEATH.get(),
-                SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING,
-                AmbientCreature::checkMobSpawnRules,
-                SpawnPlacementRegisterEvent.Operation.AND);
-
-        event.register(CHRYSALIS_GLASSWING.get(),
-                SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING,
-                AmbientCreature::checkMobSpawnRules,
-                SpawnPlacementRegisterEvent.Operation.AND);
-
-        event.register(CHRYSALIS_CHALKHILL.get(),
-                SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING,
-                AmbientCreature::checkMobSpawnRules,
-                SpawnPlacementRegisterEvent.Operation.AND);
-
-        event.register(CHRYSALIS_SWALLOWTAIL.get(),
-                SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING,
-                AmbientCreature::checkMobSpawnRules,
-                SpawnPlacementRegisterEvent.Operation.AND);
-
-        event.register(CHRYSALIS_MONARCH.get(),
-                SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING,
-                AmbientCreature::checkMobSpawnRules,
-                SpawnPlacementRegisterEvent.Operation.AND);
-
-        event.register(CHRYSALIS_CABBAGE.get(),
-                SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING,
-                AmbientCreature::checkMobSpawnRules,
-                SpawnPlacementRegisterEvent.Operation.AND);
-
-        event.register(CHRYSALIS_ADMIRAL.get(),
-                SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING,
-                AmbientCreature::checkMobSpawnRules,
-                SpawnPlacementRegisterEvent.Operation.AND);
-
-        event.register(CHRYSALIS_LONGWING.get(),
-                SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING,
-                AmbientCreature::checkMobSpawnRules,
-                SpawnPlacementRegisterEvent.Operation.AND);
-
-        event.register(CHRYSALIS_CLIPPER.get(),
-                SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING,
-                AmbientCreature::checkMobSpawnRules,
-                SpawnPlacementRegisterEvent.Operation.AND);
-
-        event.register(CHRYSALIS_BUCKEYE.get(),
-                SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING,
-                AmbientCreature::checkMobSpawnRules,
-                SpawnPlacementRegisterEvent.Operation.AND);
-    }
-
-    /**
-     * Registers models to be used for rendering
-     * @param event The event information
-     */
-    @SubscribeEvent
-    public static void onRegisterLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
-        event.registerLayerDefinition(ButterflyModel.LAYER_LOCATION, ButterflyModel::createBodyLayer);
-        event.registerLayerDefinition(CaterpillarModel.LAYER_LOCATION, CaterpillarModel::createBodyLayer);
-        event.registerLayerDefinition(ChrysalisModel.LAYER_LOCATION, ChrysalisModel::createBodyLayer);
-    }
+    public static final EntityType<Chrysalis> CHRYSALIS_MORPHO = registerChrysalis(Chrysalis.MORPHO_NAME, Chrysalis::createMorpho);
+    public static final EntityType<Chrysalis> CHRYSALIS_FORESTER = registerChrysalis(Chrysalis.FORESTER_NAME, Chrysalis::createForester);
+    public static final EntityType<Chrysalis> CHRYSALIS_COMMON = registerChrysalis(Chrysalis.COMMON_NAME, Chrysalis::createCommon);
+    public static final EntityType<Chrysalis> CHRYSALIS_EMPEROR = registerChrysalis(Chrysalis.EMPEROR_NAME, Chrysalis::createEmperor);
+    public static final EntityType<Chrysalis> CHRYSALIS_HAIRSTREAK = registerChrysalis(Chrysalis.HAIRSTREAK_NAME, Chrysalis::createHairstreak);
+    public static final EntityType<Chrysalis> CHRYSALIS_RAINBOW = registerChrysalis(Chrysalis.RAINBOW_NAME, Chrysalis::createRainbow);
+    public static final EntityType<Chrysalis> CHRYSALIS_HEATH = registerChrysalis(Chrysalis.HEATH_NAME, Chrysalis::createHeath);
+    public static final EntityType<Chrysalis> CHRYSALIS_GLASSWING = registerChrysalis(Chrysalis.GLASSWING_NAME, Chrysalis::createGlasswing);
+    public static final EntityType<Chrysalis> CHRYSALIS_CHALKHILL = registerChrysalis(Chrysalis.CHALKHILL_NAME, Chrysalis::createChalkhill);
+    public static final EntityType<Chrysalis> CHRYSALIS_SWALLOWTAIL = registerChrysalis(Chrysalis.SWALLOWTAIL_NAME, Chrysalis::createSwallowtail);
+    public static final EntityType<Chrysalis> CHRYSALIS_MONARCH = registerChrysalis(Chrysalis.MONARCH_NAME, Chrysalis::createMonarch);
+    public static final EntityType<Chrysalis> CHRYSALIS_CABBAGE = registerChrysalis(Chrysalis.CABBAGE_NAME, Chrysalis::createCabbage);
+    public static final EntityType<Chrysalis> CHRYSALIS_ADMIRAL = registerChrysalis(Chrysalis.ADMIRAL_NAME, Chrysalis::createAdmiral);
+    public static final EntityType<Chrysalis> CHRYSALIS_LONGWING = registerChrysalis(Chrysalis.LONGWING_NAME, Chrysalis::createLongwing);
+    public static final EntityType<Chrysalis> CHRYSALIS_CLIPPER = registerChrysalis(Chrysalis.CLIPPER_NAME, Chrysalis::createClipper);
+    public static final EntityType<Chrysalis> CHRYSALIS_BUCKEYE = registerChrysalis(Chrysalis.BUCKEYE_NAME, Chrysalis::createBuckeye);
+
+	private static EntityType<Butterfly> registerButterfly(String path, EntityType.EntityFactory<Butterfly> factory) {
+		return register(
+			path,
+			FabricEntityTypeBuilder.createMob()
+				.spawnGroup(MobCategory.CREATURE)
+				.entityFactory(factory)
+				.dimensions(new EntityDimensions(0.3f, 0.4f, true))
+				.defaultAttributes(Butterfly::createAttributes)
+				.spawnRestriction(SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING, Butterfly::checkButterflySpawnRules)
+				.build()
+		);
+	}
+
+	private static EntityType<Caterpillar> registerCaterpillar(String path, EntityType.EntityFactory<Caterpillar> factory) {
+		return register(
+			path,
+			FabricEntityTypeBuilder.createMob()
+				.spawnGroup(MobCategory.CREATURE)
+				.entityFactory(factory)
+				.dimensions(new EntityDimensions(0.1f, 0.1f, true))
+				.defaultAttributes(Caterpillar::createAttributes)
+				.spawnRestriction(SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING, AmbientCreature::checkMobSpawnRules)
+				.build()
+		);
+	}
+
+	private static EntityType<Caterpillar> registerCaterpillarHairstreak(String path, EntityType.EntityFactory<Caterpillar> factory) {
+		return register(
+			path,
+			FabricEntityTypeBuilder.createMob()
+				.spawnGroup(MobCategory.AMBIENT)
+				.entityFactory(factory)
+				.dimensions(new EntityDimensions(0.1f, 0.1f, true))
+				.defaultAttributes(Caterpillar::createAttributes)
+				.spawnRestriction(SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING, AmbientCreature::checkMobSpawnRules)
+				.build()
+		);
+	}
+
+	private static EntityType<Chrysalis> registerChrysalis(String path, EntityType.EntityFactory<Chrysalis> factory) {
+		return register(
+			path,
+			FabricEntityTypeBuilder.createMob()
+				.spawnGroup(MobCategory.AMBIENT)
+				.entityFactory(factory)
+				.dimensions(new EntityDimensions(0.1f, 0.1f, true))
+				.defaultAttributes(Chrysalis::createAttributes)
+				.spawnRestriction(SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING, AmbientCreature::checkMobSpawnRules)
+				.build()
+		);
+	}
+
+	private static <T extends Entity> EntityType<T> register(String path, EntityType<T> type) {
+		Registry.register(BuiltInRegistries.ENTITY_TYPE, ButterfliesMod.id(path), type);
+		return type;
+	}
+
+    public static void init() {}
 }

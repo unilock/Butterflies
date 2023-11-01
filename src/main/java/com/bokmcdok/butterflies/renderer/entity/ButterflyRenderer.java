@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * This is the renderer for all the butterflies in the game.
  */
-public class ButterflyRenderer  extends MobRenderer<Butterfly, ButterflyModel> {
+public class ButterflyRenderer extends MobRenderer<Butterfly, ButterflyModel> {
     /**
      * Bakes a new model for the renderer
      * @param context The current rendering context

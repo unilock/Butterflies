@@ -14,19 +14,14 @@ import org.jetbrains.annotations.NotNull;
 /**
  * The renderer for the caterpillar entity.
  */
-public class CaterpillarRenderer
-        extends MobRenderer<Caterpillar, CaterpillarModel> {
+public class CaterpillarRenderer extends MobRenderer<Caterpillar, CaterpillarModel> {
 
     /**
      * Bakes a new model for the renderer
      * @param context The current rendering context
      */
     public CaterpillarRenderer(EntityRendererProvider.Context context) {
-        super(
-                context,
-                new CaterpillarModel(
-                        context.bakeLayer(CaterpillarModel.LAYER_LOCATION)),
-                0.05F);
+        super(context, new CaterpillarModel(context.bakeLayer(CaterpillarModel.LAYER_LOCATION)), 0.05F);
     }
 
     /**

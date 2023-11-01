@@ -5,11 +5,13 @@ import com.bokmcdok.butterflies.world.block.BottledButterflyBlock;
 import com.bokmcdok.butterflies.world.block.ButterflyCherryLeavesBlock;
 import com.bokmcdok.butterflies.world.block.ButterflyLeavesBlock;
 import com.bokmcdok.butterflies.world.block.ButterflyMangroveLeavesBlock;
-import net.minecraft.client.renderer.BiomeColors;
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
@@ -17,28 +19,16 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.RegisterColorHandlersEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 
 /**
  * Registers the blocks used by the mod.
  */
-@Mod.EventBusSubscriber(modid = ButterfliesMod.MODID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class BlockRegistry {
-
-    // An instance of a deferred registry we use to register items.
-    public static final DeferredRegister<Block> INSTANCE =
-            DeferredRegister.create(ForgeRegistries.BLOCKS, ButterfliesMod.MODID);
-
-    // The bottled butterfly block when it is in the world.
-    public static final RegistryObject<Block> BOTTLED_BUTTERFLY_BLOCK =
-            INSTANCE.register(BottledButterflyBlock.NAME,
-            () -> new BottledButterflyBlock(BlockBehaviour.Properties.copy(Blocks.GLASS)
+	// The bottled butterfly block when it is in the world.
+	// TODO: registerBlockOnly is ineloquent
+    public static final Block BOTTLED_BUTTERFLY_BLOCK =
+            registerBlockOnly(BottledButterflyBlock.NAME,
+            new BottledButterflyBlock(BlockBehaviour.Properties.copy(Blocks.GLASS)
                     .isRedstoneConductor(BlockRegistry::never)
                     .isSuffocating(BlockRegistry::never)
                     .isValidSpawn(BlockRegistry::never)
@@ -48,32 +38,32 @@ public class BlockRegistry {
                     .strength(0.3F)));
 
     // Represent leaves that have butterfly eggs in them.
-    public static final RegistryObject<Block> BUTTERFLY_OAK_LEAVES =
-            INSTANCE.register("butterfly_oak_leaves", () -> butterflyLeaves(SoundType.GRASS));
+    public static final Block BUTTERFLY_OAK_LEAVES =
+            register("butterfly_oak_leaves", butterflyLeaves(SoundType.GRASS));
 
-    public static final RegistryObject<Block> BUTTERFLY_SPRUCE_LEAVES =
-            INSTANCE.register("butterfly_spruce_leaves", () -> butterflyLeaves(SoundType.GRASS));
+    public static final Block BUTTERFLY_SPRUCE_LEAVES =
+            register("butterfly_spruce_leaves", butterflyLeaves(SoundType.GRASS));
 
-    public static final RegistryObject<Block> BUTTERFLY_BIRCH_LEAVES =
-            INSTANCE.register("butterfly_birch_leaves", () -> butterflyLeaves(SoundType.GRASS));
+    public static final Block BUTTERFLY_BIRCH_LEAVES =
+            register("butterfly_birch_leaves", butterflyLeaves(SoundType.GRASS));
 
-    public static final RegistryObject<Block> BUTTERFLY_JUNGLE_LEAVES =
-            INSTANCE.register("butterfly_jungle_leaves", () -> butterflyLeaves(SoundType.GRASS));
+    public static final Block BUTTERFLY_JUNGLE_LEAVES =
+            register("butterfly_jungle_leaves", butterflyLeaves(SoundType.GRASS));
 
-    public static final RegistryObject<Block> BUTTERFLY_ACACIA_LEAVES =
-            INSTANCE.register("butterfly_acacia_leaves", () -> butterflyLeaves(SoundType.GRASS));
+    public static final Block BUTTERFLY_ACACIA_LEAVES =
+            register("butterfly_acacia_leaves", butterflyLeaves(SoundType.GRASS));
 
-    public static final RegistryObject<Block> BUTTERFLY_DARK_OAK_LEAVES =
-            INSTANCE.register("butterfly_dark_oak_leaves", () -> butterflyLeaves(SoundType.GRASS));
+    public static final Block BUTTERFLY_DARK_OAK_LEAVES =
+            register("butterfly_dark_oak_leaves", butterflyLeaves(SoundType.GRASS));
 
-    public static final RegistryObject<Block> BUTTERFLY_AZALEA_LEAVES =
-            INSTANCE.register("butterfly_azalea_leaves", () -> butterflyLeaves(SoundType.AZALEA_LEAVES));
+    public static final Block BUTTERFLY_AZALEA_LEAVES =
+            register("butterfly_azalea_leaves", butterflyLeaves(SoundType.AZALEA_LEAVES));
 
-    public static final RegistryObject<Block> BUTTERFLY_FLOWERING_AZALEA_LEAVES =
-            INSTANCE.register("butterfly_flowering_azalea_leaves", () -> butterflyLeaves(SoundType.AZALEA_LEAVES));
+    public static final Block BUTTERFLY_FLOWERING_AZALEA_LEAVES =
+            register("butterfly_flowering_azalea_leaves", butterflyLeaves(SoundType.AZALEA_LEAVES));
 
-    public static final RegistryObject<Block> BUTTERFLY_CHERRY_LEAVES =
-            INSTANCE.register("butterfly_cherry_leaves", () -> new ButterflyCherryLeavesBlock(BlockBehaviour.Properties.of()
+    public static final Block BUTTERFLY_CHERRY_LEAVES =
+            register("butterfly_cherry_leaves", new ButterflyCherryLeavesBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_PINK)
                     .strength(0.2F)
                     .randomTicks()
@@ -86,8 +76,8 @@ public class BlockRegistry {
                     .pushReaction(PushReaction.DESTROY)
                     .isRedstoneConductor(BlockRegistry::never)));
 
-    public static final RegistryObject<Block> BUTTERFLY_MANGROVE_LEAVES =
-            INSTANCE.register("butterfly_mangrove_leaves", () -> new ButterflyMangroveLeavesBlock(BlockBehaviour.Properties.of()
+    public static final Block BUTTERFLY_MANGROVE_LEAVES =
+            register("butterfly_mangrove_leaves", new ButterflyMangroveLeavesBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.PLANT)
                     .strength(0.2F)
                     .randomTicks()
@@ -100,12 +90,12 @@ public class BlockRegistry {
                     .pushReaction(PushReaction.DESTROY)
                     .isRedstoneConductor(BlockRegistry::never)));
 
-    private static ButterflyLeavesBlock butterflyLeaves(SoundType p_152615_) {
+    private static ButterflyLeavesBlock butterflyLeaves(SoundType soundType) {
         return new ButterflyLeavesBlock(BlockBehaviour.Properties.of()
                 .mapColor(MapColor.PLANT)
                 .strength(0.2F)
                 .randomTicks()
-                .sound(p_152615_)
+                .sound(soundType)
                 .noOcclusion()
                 .isValidSpawn(BlockRegistry::ocelotOrParrot)
                 .isSuffocating(BlockRegistry::never)
@@ -145,28 +135,17 @@ public class BlockRegistry {
         return entityType == EntityType.OCELOT || entityType == EntityType.PARROT;
     }
 
-    /**
-     * Register colors for (e.g.) foliage-style blocks.
-     * @param event The event fired to let us know we can register block colors.
-     */
-    @SubscribeEvent
-    public static void registerBlockColors(RegisterColorHandlersEvent.Block event){
-        // Evergreen
-        event.register((state, tint, position, color) -> FoliageColor.getEvergreenColor(),
-                BUTTERFLY_SPRUCE_LEAVES.get());
+	private static Block register(String path, Block block) {
+		Registry.register(BuiltInRegistries.BLOCK, ButterfliesMod.id(path), block);
+		Registry.register(BuiltInRegistries.ITEM, ButterfliesMod.id(path), new BlockItem(block, new FabricItemSettings()));
+		return block;
+	}
 
-        // Birch
-        event.register((state, tint, position, color) -> FoliageColor.getBirchColor(),
-                BUTTERFLY_BIRCH_LEAVES.get());
+	// TODO: registerBlockOnly is ineloquent
+	private static Block registerBlockOnly(String path, Block block) {
+		Registry.register(BuiltInRegistries.BLOCK, ButterfliesMod.id(path), block);
+		return block;
+	}
 
-        // Default
-        event.register((state, tint, position, color) ->
-                        tint != null && position != null ? BiomeColors.getAverageFoliageColor(tint, position) :
-                                                           FoliageColor.getDefaultColor(),
-                BUTTERFLY_OAK_LEAVES.get(),
-                BUTTERFLY_JUNGLE_LEAVES.get(),
-                BUTTERFLY_ACACIA_LEAVES.get(),
-                BUTTERFLY_DARK_OAK_LEAVES.get(),
-                BUTTERFLY_MANGROVE_LEAVES.get());
-    }
+	public static void init() {}
 }

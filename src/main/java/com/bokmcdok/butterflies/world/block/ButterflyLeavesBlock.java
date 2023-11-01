@@ -39,52 +39,52 @@ public class ButterflyLeavesBlock extends LeavesBlock implements ButterflyEggHol
         BlockState blockState = level.getBlockState(position);
 
         if (blockState.getBlock() == Blocks.OAK_LEAVES) {
-            swapLeavesBlock(level, position, entityId, BlockRegistry.BUTTERFLY_OAK_LEAVES.get());
+            swapLeavesBlock(level, position, entityId, BlockRegistry.BUTTERFLY_OAK_LEAVES);
             return true;
         }
 
         if (blockState.getBlock() == Blocks.SPRUCE_LEAVES) {
-            swapLeavesBlock(level, position, entityId, BlockRegistry.BUTTERFLY_SPRUCE_LEAVES.get());
+            swapLeavesBlock(level, position, entityId, BlockRegistry.BUTTERFLY_SPRUCE_LEAVES);
             return true;
         }
 
         if (blockState.getBlock() == Blocks.BIRCH_LEAVES) {
-            swapLeavesBlock(level, position, entityId, BlockRegistry.BUTTERFLY_BIRCH_LEAVES.get());
+            swapLeavesBlock(level, position, entityId, BlockRegistry.BUTTERFLY_BIRCH_LEAVES);
             return true;
         }
 
         if (blockState.getBlock() == Blocks.JUNGLE_LEAVES) {
-            swapLeavesBlock(level, position, entityId, BlockRegistry.BUTTERFLY_JUNGLE_LEAVES.get());
+            swapLeavesBlock(level, position, entityId, BlockRegistry.BUTTERFLY_JUNGLE_LEAVES);
             return true;
         }
 
         if (blockState.getBlock() == Blocks.ACACIA_LEAVES) {
-            swapLeavesBlock(level, position, entityId, BlockRegistry.BUTTERFLY_ACACIA_LEAVES.get());
+            swapLeavesBlock(level, position, entityId, BlockRegistry.BUTTERFLY_ACACIA_LEAVES);
             return true;
         }
 
         if (blockState.getBlock() == Blocks.DARK_OAK_LEAVES) {
-            swapLeavesBlock(level, position, entityId, BlockRegistry.BUTTERFLY_DARK_OAK_LEAVES.get());
+            swapLeavesBlock(level, position, entityId, BlockRegistry.BUTTERFLY_DARK_OAK_LEAVES);
             return true;
         }
 
         if (blockState.getBlock() == Blocks.AZALEA_LEAVES) {
-            swapLeavesBlock(level, position, entityId, BlockRegistry.BUTTERFLY_AZALEA_LEAVES.get());
+            swapLeavesBlock(level, position, entityId, BlockRegistry.BUTTERFLY_AZALEA_LEAVES);
             return true;
         }
 
         if (blockState.getBlock() == Blocks.FLOWERING_AZALEA_LEAVES) {
-            swapLeavesBlock(level, position, entityId, BlockRegistry.BUTTERFLY_FLOWERING_AZALEA_LEAVES.get());
+            swapLeavesBlock(level, position, entityId, BlockRegistry.BUTTERFLY_FLOWERING_AZALEA_LEAVES);
             return true;
         }
 
         if (blockState.getBlock() == Blocks.CHERRY_LEAVES) {
-            swapLeavesBlock(level, position, entityId, BlockRegistry.BUTTERFLY_CHERRY_LEAVES.get());
+            swapLeavesBlock(level, position, entityId, BlockRegistry.BUTTERFLY_CHERRY_LEAVES);
             return true;
         }
 
         if (blockState.getBlock() == Blocks.MANGROVE_LEAVES) {
-            swapLeavesBlock(level, position, entityId, BlockRegistry.BUTTERFLY_MANGROVE_LEAVES.get());
+            swapLeavesBlock(level, position, entityId, BlockRegistry.BUTTERFLY_MANGROVE_LEAVES);
             return true;
         }
 
@@ -101,52 +101,52 @@ public class ButterflyLeavesBlock extends LeavesBlock implements ButterflyEggHol
                                           BlockPos position) {
         BlockState blockState = level.getBlockState(position);
 
-        if (blockState.getBlock() == BlockRegistry.BUTTERFLY_OAK_LEAVES.get()) {
+        if (blockState.getBlock() == BlockRegistry.BUTTERFLY_OAK_LEAVES) {
             swapLeavesBlock(level, position, null, Blocks.OAK_LEAVES);
             return;
         }
 
-        if (blockState.getBlock() == BlockRegistry.BUTTERFLY_SPRUCE_LEAVES.get()) {
+        if (blockState.getBlock() == BlockRegistry.BUTTERFLY_SPRUCE_LEAVES) {
             swapLeavesBlock(level, position, null, Blocks.SPRUCE_LEAVES);
             return;
         }
 
-        if (blockState.getBlock() == BlockRegistry.BUTTERFLY_BIRCH_LEAVES.get()) {
+        if (blockState.getBlock() == BlockRegistry.BUTTERFLY_BIRCH_LEAVES) {
             swapLeavesBlock(level, position, null, Blocks.BIRCH_LEAVES);
             return;
         }
 
-        if (blockState.getBlock() == BlockRegistry.BUTTERFLY_JUNGLE_LEAVES.get()) {
+        if (blockState.getBlock() == BlockRegistry.BUTTERFLY_JUNGLE_LEAVES) {
             swapLeavesBlock(level, position, null, Blocks.JUNGLE_LEAVES);
             return;
         }
 
-        if (blockState.getBlock() == BlockRegistry.BUTTERFLY_ACACIA_LEAVES.get()) {
+        if (blockState.getBlock() == BlockRegistry.BUTTERFLY_ACACIA_LEAVES) {
             swapLeavesBlock(level, position, null, Blocks.ACACIA_LEAVES);
             return;
         }
 
-        if (blockState.getBlock() == BlockRegistry.BUTTERFLY_DARK_OAK_LEAVES.get()) {
+        if (blockState.getBlock() == BlockRegistry.BUTTERFLY_DARK_OAK_LEAVES) {
             swapLeavesBlock(level, position, null, Blocks.DARK_OAK_LEAVES);
             return;
         }
 
-        if (blockState.getBlock() == BlockRegistry.BUTTERFLY_AZALEA_LEAVES.get()) {
+        if (blockState.getBlock() == BlockRegistry.BUTTERFLY_AZALEA_LEAVES) {
             swapLeavesBlock(level, position, null, Blocks.AZALEA_LEAVES);
             return;
         }
 
-        if (blockState.getBlock() == BlockRegistry.BUTTERFLY_FLOWERING_AZALEA_LEAVES.get()) {
+        if (blockState.getBlock() == BlockRegistry.BUTTERFLY_FLOWERING_AZALEA_LEAVES) {
             swapLeavesBlock(level, position, null, Blocks.FLOWERING_AZALEA_LEAVES);
             return;
         }
 
-        if (blockState.getBlock() == BlockRegistry.BUTTERFLY_CHERRY_LEAVES.get()) {
+        if (blockState.getBlock() == BlockRegistry.BUTTERFLY_CHERRY_LEAVES) {
             swapLeavesBlock(level, position, null, Blocks.CHERRY_LEAVES);
             return;
         }
 
-        if (blockState.getBlock() == BlockRegistry.BUTTERFLY_MANGROVE_LEAVES.get()) {
+        if (blockState.getBlock() == BlockRegistry.BUTTERFLY_MANGROVE_LEAVES) {
             swapLeavesBlock(level, position, null, Blocks.MANGROVE_LEAVES);
         }
 

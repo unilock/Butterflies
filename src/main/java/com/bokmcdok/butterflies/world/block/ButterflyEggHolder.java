@@ -5,13 +5,13 @@ import com.bokmcdok.butterflies.world.ButterflyIds;
 import com.bokmcdok.butterflies.world.entity.ambient.Caterpillar;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -31,11 +31,9 @@ public interface ButterflyEggHolder {
         int index = blockState.getValue(ButterflyLeavesBlock.BUTTERFLY_INDEX);
         String entityId = ButterflyIds.IndexToEntityId(index);
         if (entityId != null) {
-            ResourceLocation location = new ResourceLocation(
-                    ButterfliesMod.MODID,
-                    entityId + "_egg");
+            ResourceLocation location = ButterfliesMod.id(entityId + "_egg");
 
-            Item entry = ForgeRegistries.ITEMS.getValue(location);
+            Item entry = BuiltInRegistries.ITEM.get(location);
             if (entry != null) {
                 items.add(new ItemStack(entry));
             }

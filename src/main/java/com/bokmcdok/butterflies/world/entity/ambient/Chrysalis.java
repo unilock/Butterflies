@@ -2,16 +2,12 @@ package com.bokmcdok.butterflies.world.entity.ambient;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityDimensions;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 
 public class Chrysalis extends DirectionalCreature {
@@ -258,9 +254,9 @@ public class Chrysalis extends DirectionalCreature {
                              Vec3 position,
                              float yRotation) {
 
-        ResourceLocation key = new ResourceLocation(entityId + "_chrysalis");
+        ResourceLocation key = ResourceLocation.tryParse(entityId + "_chrysalis");
 
-        EntityType<?> entityType = ForgeRegistries.ENTITY_TYPES.getValue(key);
+		EntityType<?> entityType = BuiltInRegistries.ENTITY_TYPE.get(key);
         if (entityType != null) {
             Entity entity = entityType.create(level);
             if (entity instanceof Chrysalis chrysalis) {

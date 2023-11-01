@@ -52,7 +52,7 @@ public class BottledButterflyItem extends BlockItem implements ButterflyContaine
      * @param properties The properties of the item.
      */
     public BottledButterflyItem(Properties properties) {
-        super(BlockRegistry.BOTTLED_BUTTERFLY_BLOCK.get(), properties);
+        super(BlockRegistry.BOTTLED_BUTTERFLY_BLOCK, properties);
     }
 
     /**

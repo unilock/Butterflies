@@ -1,7 +1,9 @@
 package com.bokmcdok.butterflies.world.entity.ambient;
 
+import com.bokmcdok.butterflies.ButterfliesMod;
 import com.bokmcdok.butterflies.world.block.ButterflyLeavesBlock;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -9,13 +11,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.AgeableMob;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityDimensions;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.Animal;
@@ -23,10 +19,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * The butterfly entity that flies around the world, adding some ambience and
@@ -369,9 +363,8 @@ public class Butterfly extends Animal {
                              Boolean placed) {
         if (level instanceof ServerLevel) {
 
-            ResourceLocation key = new ResourceLocation(entityId);
-            EntityType<?> entityType =
-                    ForgeRegistries.ENTITY_TYPES.getValue(key);
+            ResourceLocation key = ResourceLocation.tryParse(entityId);
+            EntityType<?> entityType = BuiltInRegistries.ENTITY_TYPE.get(key);
             if (entityType != null) {
                 Entity entity = entityType.create(level);
                 if (entity instanceof Butterfly butterfly) {
@@ -416,8 +409,7 @@ public class Butterfly extends Animal {
         super(entityType, level);
 
         this.size = size;
-        this.texture = new ResourceLocation(
-                "butterflies:textures/entity/butterfly/" + texture);
+        this.texture = ButterfliesMod.id("textures/entity/butterfly/" + texture);
     }
 
     /**
