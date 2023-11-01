@@ -1,6 +1,5 @@
 {
-  "type": "forge:add_spawns",
-  "biomes": [
+  "values": [
     "minecraft:forest",
     "minecraft:flower_forest",
     "minecraft:birch_forest",
@@ -8,14 +7,6 @@
     "minecraft:old_growth_birch_forest",
     "minecraft:old_growth_pine_taiga",
     "minecraft:old_growth_spruce_taiga",
-    "minecraft:windswept_forest",
-    "minecraft:wooded_badlands"
-  ],
-  "spawners":
-  {
-    "type": "butterflies:emperor",
-    "weight": 10,
-    "minCount": 3,
-    "maxCount": 5
-  }
+    "minecraft:windswept_forest"
+  ]
 }

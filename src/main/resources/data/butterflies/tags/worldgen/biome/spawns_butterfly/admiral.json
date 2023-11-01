@@ -1,6 +1,5 @@
 {
-  "type": "forge:add_spawns",
-  "biomes": [
+  "values": [
     "minecraft:swamp",
     "minecraft:mangrove_swamp",
     "minecraft:forest",
@@ -11,12 +10,5 @@
     "minecraft:windswept_forest",
     "minecraft:river",
     "minecraft:lush_caves"
-  ],
-  "spawners":
-  {
-    "type": "butterflies:admiral",
-    "weight": 10,
-    "minCount": 3,
-    "maxCount": 5
-  }
+  ]
 }

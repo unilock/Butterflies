@@ -17,7 +17,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SpawnEggItem;
 
 /**
- * This class registers items with Forge's Item Registry
+ * This class registers items with Minecraft's Item Registry
  */
 public class ItemRegistry {
     //  Butterfly net - Used to catch butterflies

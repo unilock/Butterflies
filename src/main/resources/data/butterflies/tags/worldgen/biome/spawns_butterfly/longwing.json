@@ -1,6 +1,5 @@
 {
-  "type": "forge:add_spawns",
-  "biomes": [
+  "values": [
     "minecraft:plains",
     "minecraft:sunflower_plains",
     "minecraft:forest",
@@ -15,12 +14,5 @@
     "minecraft:sparse_jungle",
     "minecraft:bamboo_jungle",
     "minecraft:wooded_badlands"
-  ],
-  "spawners":
-  {
-    "type": "butterflies:longwing",
-    "weight": 10,
-    "minCount": 3,
-    "maxCount": 5
-  }
+  ]
 }

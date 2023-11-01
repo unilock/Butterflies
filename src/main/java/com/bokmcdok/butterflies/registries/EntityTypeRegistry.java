@@ -12,7 +12,7 @@ import net.minecraft.world.entity.ambient.AmbientCreature;
 import net.minecraft.world.level.levelgen.Heightmap;
 
 /**
- * This class registers all the entities we use with Forge's Entity Type Registry
+ * This class registers all the entities we use with Minecraft's Entity Type Registry
  */
 public class EntityTypeRegistry {
 	// Register the butterflies.

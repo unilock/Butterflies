@@ -1,6 +1,5 @@
 {
-  "type": "forge:add_spawns",
-  "biomes": [
+  "values": [
     "minecraft:plains",
     "minecraft:sunflower_plains",
     "minecraft:old_growth_spruce_taiga",
@@ -12,12 +11,5 @@
     "minecraft:meadow",
     "minecraft:river",
     "minecraft:mushroom_fields"
-  ],
-  "spawners":
-  {
-    "type": "butterflies:cabbage",
-    "weight": 10,
-    "minCount": 3,
-    "maxCount": 5
-  }
+  ]
 }

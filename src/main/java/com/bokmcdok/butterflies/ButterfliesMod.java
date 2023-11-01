@@ -4,6 +4,7 @@ import com.bokmcdok.butterflies.registries.BlockEntityTypeRegistry;
 import com.bokmcdok.butterflies.registries.BlockRegistry;
 import com.bokmcdok.butterflies.registries.EntityTypeRegistry;
 import com.bokmcdok.butterflies.registries.ItemRegistry;
+import com.bokmcdok.butterflies.world.ButterflyBiomeModifications;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.resources.ResourceLocation;
 import org.slf4j.Logger;
@@ -27,6 +28,8 @@ public class ButterfliesMod implements ModInitializer
         BlockEntityTypeRegistry.init();
 		EntityTypeRegistry.init();
 		ItemRegistry.init();
+
+		ButterflyBiomeModifications.register();
     }
 
 	public static ResourceLocation id(String path) {
